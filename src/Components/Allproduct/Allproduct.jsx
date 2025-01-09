@@ -1,17 +1,11 @@
 import React, { useContext } from 'react'
 import { ProductsContext } from '../Context/Context'
 import { AiFillStar } from "react-icons/ai";
-import { useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom'
+
 
 const Allproduct = () => {
     const {products} = useContext(ProductsContext)
-    const navigator = useNavigate()
-
-    const handleAddToCart = (id) => {
-        console.log(id)
-        navigator('/cart-product', {state: products})
-    }
-  
   return (
     <div className="w-[1200px] mx-auto">
     <div>
@@ -53,10 +47,11 @@ const Allproduct = () => {
                     <AiFillStar className="text-yellow-500 ml-1" size={16} />
                     <AiFillStar className="text-yellow-500 ml-1" size={16} />
                     <AiFillStar className="text-yellow-500 ml-1" size={16} />
+                    <Link to={`/cart-product/${product.id}`}>
                     <button className='bg-red-500 text-white  px-2 py-0.5 rounded-lg
                     hover:bg-red-400'
-                    onClick={() => handleAddToCart(products)}
-                    >Add to Cart</button>
+                    
+                    >Add to Cart</button></Link>
                 </div>
             </div>
         ))}
