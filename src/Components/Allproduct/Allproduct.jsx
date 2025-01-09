@@ -1,9 +1,16 @@
 import React, { useContext } from 'react'
 import { ProductsContext } from '../Context/Context'
 import { AiFillStar } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 
 const Allproduct = () => {
     const {products} = useContext(ProductsContext)
+    const navigator = useNavigate()
+
+    const handleAddToCart = (id) => {
+        console.log(id)
+        navigator('/cart-product', {state: products})
+    }
   
   return (
     <div className="w-[1200px] mx-auto">
@@ -38,7 +45,7 @@ const Allproduct = () => {
                     </span>
                 </div>
                 {/* Product Rating */}
-                <div className="flex items-center">
+                <div className="flex items-center gap-1">
                     <span className="text-yellow-500 font-bold text-sm">
                         {product.rating?.rate || 4.5}
                     </span>
@@ -46,9 +53,16 @@ const Allproduct = () => {
                     <AiFillStar className="text-yellow-500 ml-1" size={16} />
                     <AiFillStar className="text-yellow-500 ml-1" size={16} />
                     <AiFillStar className="text-yellow-500 ml-1" size={16} />
+                    <button className='bg-red-500 text-white  px-2 py-0.5 rounded-lg
+                    hover:bg-red-400'
+                    onClick={() => handleAddToCart(products)}
+                    >Add to Cart</button>
                 </div>
             </div>
         ))}
+    </div>
+    <div className='flex justify-center items-center'>
+        <button className='text-center text-white bg-red-500 my-5 px-10 py-3 rounded-lg font-medium text-xl hover:bg-red-300 transition-colors duration-200 '>Load more</button>
     </div>
 </div>
   )
